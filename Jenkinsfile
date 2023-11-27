@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using the provided Dockerfile
-                    sh 'docker build saber69/weather-app:latest -f Dockerfile .'
+                    sh 'docker build -t saber69/weather-app:latest -f Dockerfile .'
                 }
             }
         }
