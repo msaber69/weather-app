@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: weather-app-container
-          image: your-docker-username/weather-app:latest
+          image: saber69/weather-app:latest
           ports:
             - containerPort: 3000
