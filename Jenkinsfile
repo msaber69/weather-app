@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-    tools {nodejs "nodejs"}
+    tools {
+        nodejs "nodejs"
+    }
 
     environment {
         DOCKER_IMAGE = 'saber69/weather-app:latest'
@@ -11,16 +13,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-            }
-        }
-
-
-        stage('Build and Test Locally') {
-            steps {
-                script {
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
             }
         }
 
@@ -42,14 +34,17 @@ pipeline {
             }
         }
 
-        /*stage('Deploy to Kubernetes') {
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Add your Kubernetes deployment steps here
-                    // For example, kubectl apply -f deployment.yaml
+                    kubernetesDeploy(
+                        kubeconfigId: '5e480843-4604-4183-ae53-e2f3914c5d1c',
+                        configs: '/Users/msaber/weather-app/deployment.yaml', 
+                        enableConfigSubstitution: true
+                    )
                 }
             }
-        }*/
+        }
     }
 
     post {
