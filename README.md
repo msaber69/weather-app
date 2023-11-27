@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Weather App with React TypeScript, Node.js, MongoDB, and Jenkins CI/CD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project demonstrates the creation of a weather application using React with TypeScript for the frontend, Node.js with Express for the backend, and MongoDB as the database. Jenkins is set up for Continuous Integration and Continuous Deployment (CI/CD) to automate the build, test, and deployment processes.
 
-In the project directory, you can run:
+## Project Structure
 
-### `npm start`
+The project is structured as follows:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **`client/`**: Contains the React TypeScript weather app.
+- **`server/`**: Contains the Node.js server for fetching weather data.
+- **`Jenkinsfile`**: Jenkins Pipeline script for CI/CD.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React**: JavaScript library for building user interfaces.
+- **TypeScript**: Typed superset of JavaScript.
+- **Node.js**: JavaScript runtime for server-side development.
+- **Express**: Web application framework for Node.js.
+- **MongoDB**: NoSQL database for storing weather data.
+- **Jenkins**: CI/CD automation tool.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js and npm installed.
+- Docker installed.
+- MongoDB installed and running.
+- Jenkins installed and configured.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/msaber69/weather-app.git
+   cd weather-app
+   ```
 
-### `npm run eject`
+2. **Client (React TypeScript):**
+   ```bash
+   cd client
+   npm install
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. **Server (Node.js with MongoDB):**
+   ```bash
+   cd server
+   npm install
+   node server.js
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Jenkins CI/CD:**
+   - Set up a Jenkins pipeline with the provided Jenkinsfile.
+   - Configure Jenkins to connect to your version control repository.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## MongoDB Setup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Ensure MongoDB is installed and running on your machine or server. Update the MongoDB connection details in the `server/server.js` file if needed.
 
-## Learn More
+## Jenkins CI/CD Pipeline
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The Jenkins CI/CD pipeline is configured in the `Jenkinsfile`. It includes the following stages:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Checkout:** Fetches the source code from the repository.
+2. **Build Docker Image:** Builds the Docker image for the application.
+3. **Push Docker Image:** Pushes the Docker image to a container registry (e.g., Docker Hub).
+4. **Deploy to Kubernetes:** Deploys the application to Kubernetes (optional, uncomment if needed).
+
+## Additional Notes
+
+- Ensure Docker is running and properly configured on the Jenkins server.
+- Adjust Jenkins configurations, such as credentials and Kubernetes deployment, based on your setup.
+
+
+This README.md file now includes information about MongoDB and how to set it up. Adjust the MongoDB connection details in the `server/server.js` file according to your MongoDB configuration.
