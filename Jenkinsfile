@@ -12,6 +12,23 @@ pipeline {
             }
         }
 
+        stage('Install Node.js and npm') {
+            steps {
+                script {
+                    // Install nvm
+                    sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
+
+                    // Load nvm
+                    sh 'export NVM_DIR="$HOME/.nvm"'
+                    sh '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+
+                    // Install Node.js and npm
+                    sh 'nvm install node'
+                    sh 'npm --version'
+                }
+            }
+        }
+
         stage('Build and Test Locally') {
             steps {
                 script {
