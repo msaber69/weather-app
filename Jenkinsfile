@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("saber69/weather-app:${env.BUILD_ID}")
+                    docker.build("saber69/weather-app")
                 }
             }
         }
