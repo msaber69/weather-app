@@ -1,14 +1,19 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'saber69/weather-app:latest'
+            args '-m 2g'
+        }
+    }
 
     tools {
         dockerTool 'docker'
         nodejs "nodejs"
     }
 
-    environment {
+    /*environment {
         DOCKER_IMAGE = 'saber69/weather-app:latest'
-    }
+    }*/
 
     stages {
         stage('Checkout') {
@@ -17,14 +22,6 @@ pipeline {
             }
         }
 
-        stage('Check Docker Daemon') {
-            steps {
-                script {
-                    // Check if Docker daemon is running
-                    sh 'docker info'
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
