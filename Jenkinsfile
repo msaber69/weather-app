@@ -1,6 +1,8 @@
 pipeline {
     agent any
 
+    tools {nodejs "nodejs"}
+
     environment {
         DOCKER_IMAGE = 'saber69/weather-app:latest'
     }
@@ -12,22 +14,6 @@ pipeline {
             }
         }
 
-        stage('Install Node.js and npm') {
-            steps {
-                script {
-                    // Check if nvm is installed, and if not, install it
-                    sh 'command -v nvm || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
-
-                    /*// Load nvm
-                    sh "export NVM_DIR=${NVM_DIR}"
-                    sh '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'*/
-
-                    // Install Node.js and npm
-                    sh 'nvm install node'
-                    sh 'npm --version'
-                }
-            }
-        }
 
         stage('Build and Test Locally') {
             steps {
