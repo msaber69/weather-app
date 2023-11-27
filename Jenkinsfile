@@ -1,31 +1,30 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = 'saber69/weather-app:latest'
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build and Test Locally') {
             steps {
                 script {
-                    docker.image('node:14').inside {
-                        sh 'npm install'
-                    }
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
 
-        /*stage('Test') {
-            steps {
-                script {
-                    docker.image('node:14').inside {
-                        sh 'npm test'
-                    }
-                }
-            }
-        }*/
-
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("saber69/weather-app")
+                    docker.build(env.DOCKER_IMAGE)
                 }
             }
         }
@@ -34,7 +33,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("saber69/weather-app:${env.BUILD_ID}").push()
+                        docker.image(env.DOCKER_IMAGE).push()
                     }
                 }
             }
@@ -43,13 +42,16 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    kubernetesDeploy(
-                        kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: 'k8s/deployment.yaml',
-                        enableConfigSubstitution: true
-                    )
+                    // Add your Kubernetes deployment steps here
+                    // For example, kubectl apply -f deployment.yaml
                 }
             }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Pipeline failed! Cleanup or notify here.'
         }
     }
 }
