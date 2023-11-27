@@ -6,10 +6,8 @@ pipeline {
         nodejs "nodejs"
     }
 
-    environment{
-        
-        registry = "saber69/weather-app"
-        registryCredential = 'dockerhub-credential-name'        
+    environment {
+        DOCKER_IMAGE = 'saber69/weather-app:latest'
     }
 
     stages {
@@ -20,10 +18,11 @@ pipeline {
         }
 
 
-        stage('Building image') {
-            steps{
+        stage('Build Docker Image') {
+            steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    // Build Docker image using the provided Dockerfile
+                    sh 'docker build -t saber69/weather-app:latest -f Dockerfile .'
                 }
             }
         }
