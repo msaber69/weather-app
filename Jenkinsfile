@@ -18,9 +18,9 @@ pipeline {
                     // Check if nvm is installed, and if not, install it
                     sh 'command -v nvm || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
 
-                    // Load nvm
+                    /*// Load nvm
                     sh "export NVM_DIR=${NVM_DIR}"
-                    sh '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
+                    sh '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'*/
 
                     // Install Node.js and npm
                     sh 'nvm install node'
