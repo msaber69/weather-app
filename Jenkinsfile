@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     tools {
-        dockerTool "docker"
         nodejs "nodejs"
     }
 
@@ -20,7 +19,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(env.DOCKER_IMAGE)
+                    // Pull the Docker image for the build environment
+                    docker.image('node:14-alpine').pull()
+
+                    // Build Docker image using the provided Dockerfile
+                    docker.build(env.DOCKER_IMAGE, '-f Dockerfile .')
                 }
             }
         }
@@ -28,6 +31,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    // Push Docker image to a container registry (e.g., Docker Hub)
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         docker.image(env.DOCKER_IMAGE).push()
                     }
