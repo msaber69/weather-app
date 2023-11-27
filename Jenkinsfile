@@ -39,14 +39,14 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        /*stage('Deploy to Kubernetes') {
             steps {
                 script {
                     // Add your Kubernetes deployment steps here
                     // For example, kubectl apply -f deployment.yaml
                 }
             }
-        }
+        }*/
     }
 
     post {
