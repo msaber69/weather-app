@@ -22,17 +22,22 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using the provided Dockerfile
-                    sh 'docker build -t saber69/weather-app:latest -f Dockerfile .'
+                    docker.image('node:14-alpine').inside {
+                        sh 'npm install'
+                        sh 'npm run build'
+                    }
                 }
             }
         }
 
-        stage('Push Docker Image') {
+
+         stage('Push Docker Image') {
             steps {
                 script {
                     // Push Docker image to a container registry (e.g., Docker Hub)
-                    sh 'docker login -u saber69 -p Math0623736244'
-                    sh 'docker push saber69/weather-app:latest'
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image(env.DOCKER_IMAGE).push()
+                    }
                 }
             }
         }
