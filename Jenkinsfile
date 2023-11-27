@@ -15,8 +15,8 @@ pipeline {
         stage('Install Node.js and npm') {
             steps {
                 script {
-                    // Install nvm
-                    sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
+                    // Check if nvm is installed, and if not, install it
+                    sh 'command -v nvm || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
 
                     // Load nvm
                     sh "export NVM_DIR=${NVM_DIR}"
