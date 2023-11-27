@@ -1,19 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'saber69/weather-app:latest'
-            args '-m 2g'
-        }
-    }
+    agent any
 
     tools {
         dockerTool 'docker'
         nodejs "nodejs"
     }
 
-    /*environment {
+    environment {
         DOCKER_IMAGE = 'saber69/weather-app:latest'
-    }*/
+    }
 
     stages {
         stage('Checkout') {
