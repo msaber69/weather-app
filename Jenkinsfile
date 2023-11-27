@@ -19,7 +19,7 @@ pipeline {
                     sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
 
                     // Load nvm
-                    sh 'export NVM_DIR="$HOME/.nvm"'
+                    sh "export NVM_DIR=${NVM_DIR}"
                     sh '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
 
                     // Install Node.js and npm
