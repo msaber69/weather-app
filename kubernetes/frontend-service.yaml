@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: weather-app-service
+  name: frontend-service
 spec:
   selector:
-    app: weather-app
+    app: frontend
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-  type: LoadBalancer

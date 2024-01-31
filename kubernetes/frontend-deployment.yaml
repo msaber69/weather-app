@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weather-app-deployment
+  name: frontend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: weather-app
+      app: frontend
   template:
     metadata:
       labels:
-        app: weather-app
+        app: frontend
     spec:
       containers:
-        - name: weather-app-container
+        - name: frontend
           image: saber69/weather-app:latest
           ports:
             - containerPort: 3000
