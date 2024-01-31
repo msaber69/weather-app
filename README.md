@@ -1,4 +1,4 @@
-# Weather App with React TypeScript, Node.js, MongoDB, Kubernetes, and Jenkins CI/CD
+# Weather App with React TypeScript, Node.js, MySQL, Kubernetes, and Jenkins CI/CD
 
 ## Authors 
 
